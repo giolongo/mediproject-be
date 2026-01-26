@@ -7,6 +7,7 @@ import { File } from '../entities/file.entity';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { StorageService } from '../storage/storage.service';
+import { Express } from 'express';
 
 @Injectable()
 export class ProductService {
