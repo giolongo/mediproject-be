@@ -30,6 +30,7 @@ import { File } from './entities/file.entity';
           database: configService.get('DB_DATABASE'),
           entities: [User, Product, ProductDetail, File],
           synchronize: configService.get('DB_SYNCHRONIZE', 'true') === 'true',
+          schema: 'public',
           ssl: false,
         };
       },
