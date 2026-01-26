@@ -9,6 +9,7 @@ import {
     UseInterceptors,
     UploadedFiles,
     ParseIntPipe,
+    Delete,
 } from '@nestjs/common';
 import { FilesInterceptor } from '@nestjs/platform-express';
 import { ProductService } from './product.service';
@@ -44,6 +45,14 @@ export class ProductController {
         @UploadedFiles() files: Express.Multer.File[],
     ) {
         return this.productService.uploadFiles(id, files);
+    }
+
+    @Delete(':id')
+    @UseGuards(JwtAuthGuard)
+    deleteFIle(
+        @Param('id', ParseIntPipe) id: number
+    ) {
+        return this.productService.remove(id);
     }
 
     @Patch(':id')
