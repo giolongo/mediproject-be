@@ -46,6 +46,7 @@ export class ProductService {
     async create(createProductDto: CreateProductDto): Promise<Product> {
         const product = this.productRepository.create({
             name: createProductDto.name,
+            description: createProductDto.description,
             priority: createProductDto.priority,
         });
 
@@ -94,6 +95,9 @@ export class ProductService {
         // Update basic product fields
         if (updateProductDto.name) {
             product.name = updateProductDto.name;
+        }
+        if (updateProductDto.description) {
+            product.description = updateProductDto.description;
         }
         if (updateProductDto.priority !== undefined) {
             product.priority = updateProductDto.priority;

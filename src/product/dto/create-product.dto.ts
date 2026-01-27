@@ -16,6 +16,10 @@ export class CreateProductDto {
     @IsNotEmpty()
     name: string;
 
+    @IsString()
+    @IsNotEmpty()
+    description: string;
+
     @IsNumber()
     @Transform(({ value }) => (typeof value === 'string' ? Number(value) : value))
     priority: number;

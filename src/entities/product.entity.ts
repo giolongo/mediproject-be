@@ -11,6 +11,9 @@ export class Product {
     name: string;
 
     @Column()
+    description: string;
+
+    @Column()
     priority: number;
 
     @OneToMany(() => ProductDetail, (detail) => detail.product, {
