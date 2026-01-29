@@ -44,10 +44,15 @@ export class ProductService {
     }
 
     async create(createProductDto: CreateProductDto): Promise<Product> {
+        const { max } = await this.productRepository
+            .createQueryBuilder('product')
+            .select('MAX(product.priority)', 'max')
+            .getRawOne();
+
         const product = this.productRepository.create({
             name: createProductDto.name,
             description: createProductDto.description,
-            priority: createProductDto.priority,
+            priority: (max || 0) + 1,
         });
 
         const savedProduct = await this.productRepository.save(product);
