@@ -78,10 +78,11 @@ export class ProductService {
 
         if (files && files.length > 0) {
             for (const file of files) {
+                console.log(file.originalname);
                 let type: 'image' | 'pdf' | 'video' = 'image';
-                if (file.originalname.toLowerCase().endsWith('-pdf')) {
+                if (file.originalname.toLowerCase().endsWith('pdf')) {
                     type = 'pdf';
-                } else if (file.originalname.toLowerCase().endsWith('-video')) {
+                } else if (file.originalname.toLowerCase().endsWith('video')) {
                     type = 'video';
                 }
 
