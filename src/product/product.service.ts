@@ -73,9 +73,25 @@ export class ProductService {
 
     async uploadFiles(id: number, files: Express.Multer.File[]): Promise<Product> {
         const product = await this.findOne(id);
+        const productFiles = await this.fileRepository.find({ where: { id_product: id } });
+
 
         if (files && files.length > 0) {
             for (const file of files) {
+                let type: 'image' | 'pdf' | 'video' = 'image';
+                if (file.originalname.toLowerCase().endsWith('-pdf')) {
+                    type = 'pdf';
+                } else if (file.originalname.toLowerCase().endsWith('-video')) {
+                    type = 'video';
+                }
+
+                // Delete existing file of the same type
+                const existingFile = productFiles.find(f => f.name === type);
+                if (existingFile) {
+                    await this.storageService.deleteFile(existingFile.location);
+                    await this.fileRepository.delete(existingFile.id);
+                }
+
                 const location = await this.storageService.uploadFile(file, id);
 
                 const fileEntity = this.fileRepository.create({
