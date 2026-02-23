@@ -24,4 +24,4 @@ jobs:
             echo "Error: SUPABASE_DB_URL secret is not set."
             exit 1
           fi
-          psql "$SUPABASE_DB_URL" -c "INSERT INTO ping;"
+          psql "$SUPABASE_DB_URL" -c "INSERT INTO ping DEFAULT VALUES;"
