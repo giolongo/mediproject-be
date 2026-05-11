@@ -31,7 +31,9 @@ import { File } from './entities/file.entity';
           entities: [User, Product, ProductDetail, File],
           synchronize: configService.get('DB_SYNCHRONIZE', 'true') === 'true',
           schema: 'mediproject',
-          ssl: false,
+          ssl: {
+            rejectUnauthorized: false,
+          },
         };
       },
       inject: [ConfigService],
